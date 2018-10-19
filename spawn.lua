@@ -2,6 +2,7 @@ local give_items = {
     ItemStack("default:pick_wood"),
     ItemStack("default:stick 2"),
     ItemStack("default:torch 2"),
+    ItemStack("default:apple 2"),
 }
 
 simple_quests.register("tigris_story:arrival", {
