@@ -7,7 +7,7 @@ simple_quests.register("tigris_story:first_mining", {
 
         state:objective("stone", simple_quests.ohelp.count.init{
             description = "Mine stone.",
-            max_count = 10,
+            max_count = 20,
         })
 
         state:objective("lightwood_trunk", simple_quests.ohelp.count.init{
@@ -30,6 +30,15 @@ simple_quests.register("tigris_story:first_mining", {
             state:set_step("done")
         end,
     },
+
+    done = function(state)
+        local player = minetest.get_player_by_name(state.quest.player)
+        if player and player:get_meta():get_int("tigris_story:given_glasses") ~= 1 then
+            minetest.add_item(player:get_pos(), player:get_inventory():add_item("main", ItemStack("tigris_magic:mapping_glasses")))
+            minetest.chat_send_player(state.quest.player, "You receive Glasses of Mapping. Equip them like jewelry.")
+            player:get_meta():set_int("tigris_story:given_glasses", 1)
+        end
+    end,
 })
 
 minetest.register_on_dignode(function(pos, node, digger)
