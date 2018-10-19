@@ -34,5 +34,5 @@ tigris.include("altar.lua")
 -- Spawning and initial arrival quest.
 tigris.include("spawn.lua")
 
--- Get the player mining basic materials.
+-- Get the player mining basic materials and farming lightwood.
 tigris.include("first_mining.lua")
