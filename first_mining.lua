@@ -23,11 +23,12 @@ simple_quests.register("tigris_story:first_mining", {
 
     steps = {
         farm = function(state)
-            minetest.chat_send_player(state.quest.player, "Lightwood trees are important resources. You can grow new lightwood trees by placing their saplings on coal blocks or coal in stone. Be careful that there is enough empty space above the sapling for it to grow.")
+            state.superdesc = state.superdesc .. "\n\nLightwood trees are important resources. You can grow new lightwood trees by placing their saplings on coal blocks or coal in stone. Be careful that there is enough empty space above the sapling for it to grow."
             state:objective("place", simple_quests.ohelp.count.init{
                 description = "Place a lightwood sapling on coal.",
                 max_count = 1,
             })
+            state:superdesc_show("Quest information updated:")
             state:set_step("pray")
         end,
         pray = function(state)
@@ -50,6 +51,9 @@ simple_quests.register("tigris_story:first_mining", {
 })
 
 minetest.register_on_dignode(function(pos, node, digger)
+    if not digger or not digger:is_player() then
+        return
+    end
     local name = digger:get_player_name()
     local q = simple_quests.quest_active("tigris_story:first_mining", name)
     if q then
@@ -66,6 +70,9 @@ minetest.register_on_dignode(function(pos, node, digger)
 end)
 
 minetest.register_on_placenode(function(pos, node, placer)
+    if not placer or not placer:is_player() then
+        return
+    end
     local name = placer:get_player_name()
     local q = simple_quests.quest_active("tigris_story:first_mining", name)
     if q then

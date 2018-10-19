@@ -18,6 +18,8 @@ minetest.register_node("tigris_story:altar", {
         },
     },
     tiles = {"default_diamond_block.png"},
+    groups = {cracky = 1, level = 3},
+    sounds = default.node_sound_stone_defaults(),
 
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
