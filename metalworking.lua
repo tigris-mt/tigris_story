@@ -38,6 +38,10 @@ simple_quests.register("tigris_story:metalworking", {
             state:set_step("done")
         end,
     },
+
+    done = function(state)
+        tigris.story.give_quest("tigris_story:hunting", state.quest.player)
+    end,
 })
 
 simple_quests.ohelp.ereg.dig("tigris_story:metalworking", function(q, pos, node)

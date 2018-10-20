@@ -2,7 +2,7 @@ simple_quests.register("tigris_story:arrival", {
     shortdesc = "Arrival",
     init = function(state)
         state.longdesc = "Your first orders after arrival in the new world."
-        state.superdesc = "Welcome to the Room of Light.\nThe time has come for you to conquer this world.\nApproach the altar of Anemyde the Merciful and receive her blessing."
+        state.superdesc = "Welcome to the Room of Light.\nThe time has come for you to conquer this world.\nApproach the altar of Inemyde the Merciful and receive her blessing."
 
         state:objective("pray", {
             description = "Pray at the altar.",
@@ -58,7 +58,7 @@ minetest.register_node("tigris_story:lightwood_spawner", {
 
     on_construct = function(pos)
         minetest.get_node_timer(pos):start(1)
-        minetest.get_meta(pos):set_string("infotext", "Sowing Hand of Anemyde\nThis sacred device applies the slow but inevitable power of Anemyde to ensure the nearby caves will never run out of lightwood.")
+        minetest.get_meta(pos):set_string("infotext", "Sowing Hand of Inemyde\nThis sacred device applies the slow but inevitable power of Inemyde to ensure the nearby caves will never run out of lightwood.")
     end,
 
     on_timer = function(pos)

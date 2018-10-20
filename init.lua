@@ -28,6 +28,20 @@ minetest.register_chatcommand("continue_story", {
     end,
 })
 
+function m.kill_helper(quest, func)
+    local old = tigris.mobs.death_callback
+    function tigris.mobs.death_callback(mob, player)
+        if player and player:is_player() then
+            local name = player:get_player_name()
+            local q = simple_quests.quest_active(quest, name)
+            if q then
+                func(q, mob)
+            end
+        end
+        return old(mob, player)
+    end
+end
+
 -- The focal point of early quests.
 tigris.include("altar.lua")
 
@@ -39,3 +53,6 @@ tigris.include("first_mining.lua")
 
 -- Demonstrate more mining and metalworking, send the player deeper.
 tigris.include("metalworking.lua")
+
+-- Get the player started on hunting and make them aware of clay worms specifically.
+tigris.include("hunting.lua")

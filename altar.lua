@@ -6,7 +6,7 @@ local give_items = {
 }
 
 minetest.register_node("tigris_story:altar", {
-    description = "Altar of Anemyde",
+    description = "Altar of Inemyde",
     paramtype = "light",
     light_source = minetest.LIGHT_MAX,
     drawtype = "nodebox",
@@ -29,17 +29,20 @@ minetest.register_node("tigris_story:altar", {
             button_exit[0,1;1,1;pray;Pray]
             button_exit[0,2;1,1;mock;Mock]
         ]])
-        meta:set_string("infotext", "Altar of Anemyde")
+        meta:set_string("infotext", "Altar of Inemyde")
     end,
 
     on_receive_fields = function(pos, _, fields, sender)
         local name = sender:get_player_name()
         if fields.pray then
             if minetest.get_gametime() - sender:get_meta():get_int("tigris_story:last_pray") < 10 then
-                minetest.chat_send_player(name, "Anemyde does not appreciate mindless, rapid devotion. Return after a moment of reflection.")
+                minetest.chat_send_player(name, "Inemyde does not appreciate mindless, rapid devotion. Return after a moment of reflection.")
             else
                 if simple_quests.quest_active("tigris_story:first_mining", name, "previous") == "pray" then
                     local q = simple_quests.quest_active("tigris_story:first_mining", name)
+                    q:objective_done("pray")
+                elseif simple_quests.quest_active("tigris_story:hunting", name, "previous") == "pray" then
+                    local q = simple_quests.quest_active("tigris_story:hunting", name)
                     q:objective_done("pray")
                 else
                     local inv = sender:get_inventory()
@@ -48,7 +51,7 @@ minetest.register_node("tigris_story:altar", {
                             inv:add_item("main", stack)
                         end
                     end
-                    minetest.chat_send_player(name, "Anemyde has ensured you have the most basic of tools.")
+                    minetest.chat_send_player(name, "Inemyde has ensured you have the most basic of tools.")
                     local q = simple_quests.quest_active("tigris_story:arrival", name)
                     if q then
                         q:objective_done("pray")
@@ -59,9 +62,9 @@ minetest.register_node("tigris_story:altar", {
         elseif fields.mock then
             if sender:get_hp() >= 2 then
                 sender:set_hp(math.max(1, sender:get_hp() / 2))
-                minetest.chat_send_player(name, "Anemyde will punish mockery of her own altar. Let humility guide your actions.")
+                minetest.chat_send_player(name, "Inemyde will punish mockery of her own altar. Let humility guide your actions.")
             else
-                minetest.chat_send_player(name, "Anemyde will forgive you for the sake of your grievous wounds.")
+                minetest.chat_send_player(name, "Inemyde will forgive you for the sake of your grievous wounds.")
             end
         end
     end,
