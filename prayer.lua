@@ -14,7 +14,7 @@ local function prayer_function(id, label, icon, mana, delay, func)
             return false
         end
 
-        if player:get_hp() ~= state.hp or vector.distance(state.pos, player:getpos()) > 1 then
+        if player:get_hp() < state.hp or vector.distance(state.pos, player:getpos()) > 1 then
             alert(player, "Your body was disrupted.")
             playereffects.cancel_effect_type(ename, true, player:get_player_name())
             return false
