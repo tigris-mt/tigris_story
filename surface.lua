@@ -8,7 +8,7 @@ simple_quests.register("tigris_story:surface", {
             "Your grand mission, given by Inemyde, is to conquer the world, transform it, and defeat the demonic Aspects of Bulorset.",
             "The Underground is but one third of the world you are now in, the other two domains being the Surface and the Sky. Unfortunantely the latter two domains are ruled by the Sun, which is toxic to the power of Inemyde.",
             "In order to protect yourself against the direct power of the burning rays, you must use Amulets of Solar Shield.",
-            "Once you have done this, you will be prepared for ascension."
+            "Once you have crafted at least one, you will be prepared for ascension."
         }, "\n")
     end,
 
