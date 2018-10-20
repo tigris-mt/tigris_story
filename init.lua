@@ -42,7 +42,11 @@ function m.kill_helper(quest, func)
     end
 end
 
+-- Prayer mechanic (chatcommands with gameplay effects like teleportation).
 tigris.include("prayer.lua")
+
+-- Surface spawn location.
+tigris.include("surface_spawn.lua")
 
 -- The focal point of early quests.
 tigris.include("altar.lua")
@@ -61,3 +65,5 @@ tigris.include("hunting.lua")
 
 -- Transportation to the surface.
 tigris.include("surface.lua")
+
+-- Guide the player to find useful surface materials like flowers.

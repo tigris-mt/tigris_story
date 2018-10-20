@@ -93,5 +93,5 @@ register("tigris_story:golden_altar",
             q:objective_done("pray")
         end
 
-        player:set_pos(vector.new(0, 0, 0))
+        player:setpos(tigris.story.surface_spawn())
     end)

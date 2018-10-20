@@ -33,6 +33,10 @@ simple_quests.register("tigris_story:surface", {
             state:set_step("done")
         end,
     },
+
+    done = function(state)
+        tigris.story.give_quest("tigris_story:next_steps", state.quest.player)
+    end,
 })
 
 simple_quests.ohelp.ereg.craft("tigris_story:surface", function(q, stack)
