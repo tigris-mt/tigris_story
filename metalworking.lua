@@ -2,7 +2,7 @@ simple_quests.register("tigris_story:metalworking", {
     shortdesc = "Metalworking",
     init = function(state)
         state.longdesc = "Mining and working metals are vital functions."
-        state.superdesc = "This world is rich in metals. You can make use of them all. Collect some of the most common metals and a furnace to smelt them in. You may need to explore beyond the Room of Light and it's tunnels."
+        state.superdesc = "This world is rich in metals. You can make use of them all. Collect some of the most common metals and a furnace to smelt them in. You may need to explore beyond the Room of Light and it's tunnels. Once you have collected some metals, you can craft better tools."
 
         state:objective("iron", simple_quests.ohelp.count.init{
             description = "Mine iron.",
@@ -20,7 +20,24 @@ simple_quests.register("tigris_story:metalworking", {
             description = "Place a furnace.",
             max_count = 1,
         })
+
+        state.step = "pick"
     end,
+
+    steps = {
+        pick = function(state)
+            state:objective("pick", simple_quests.ohelp.count.init{
+                description = "Craft a bronze pick.",
+                max_count = 1,
+            })
+            state:objective("sword", simple_quests.ohelp.count.init{
+                description = "Craft a bronze sword.",
+                max_count = 1,
+            })
+
+            state:set_step("done")
+        end,
+    },
 })
 
 simple_quests.ohelp.ereg.dig("tigris_story:metalworking", function(q, pos, node)
@@ -40,6 +57,17 @@ simple_quests.ohelp.ereg.place("tigris_story:metalworking", function(q, pos, nod
         furnace = "default:furnace",
     } do
         if q.objectives[k] and not q.objectives[k].complete and node.name == v then
+            simple_quests.ohelp.count.add(q, k, 1)
+        end
+    end
+end)
+
+simple_quests.ohelp.ereg.craft("tigris_story:metalworking", function(q, stack)
+    for k,v in pairs{
+        pick = "default:pick_bronze",
+        sword = "default:sword_bronze",
+    } do
+        if q.objectives[k] and not q.objectives[k].complete and stack:get_name() == v then
             simple_quests.ohelp.count.add(q, k, 1)
         end
     end
