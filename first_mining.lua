@@ -35,7 +35,6 @@ simple_quests.register("tigris_story:first_mining", {
             state:objective("pray", {
                 description = "Pray at the Altar of Anemyde.",
             })
-
             state:set_step("done")
         end,
     },
@@ -47,40 +46,28 @@ simple_quests.register("tigris_story:first_mining", {
             minetest.chat_send_player(state.quest.player, "You receive Glasses of Mapping. Equip them like jewelry.")
             player:get_meta():set_int("tigris_story:given_glasses", 1)
         end
+
+        tigris.story.give_quest("tigris_story:metalworking", state.quest.player)
     end,
 })
 
-minetest.register_on_dignode(function(pos, node, digger)
-    if not digger or not digger:is_player() then
-        return
-    end
-    local name = digger:get_player_name()
-    local q = simple_quests.quest_active("tigris_story:first_mining", name)
-    if q then
-        for k,v in pairs{
-            stone = "default:stone",
-            lightwood_trunk = "tigris_underworld:lightwood_trunk",
-            lightwood_pod = "tigris_underworld:lightwood_pod",
-        } do
-            if q.objectives[k] and not q.objectives[k].complete and node.name == v then
-                simple_quests.ohelp.count.add(q, k, 1)
-            end
+simple_quests.ohelp.ereg.dig("tigris_story:first_mining", function(q, pos, node)
+    for k,v in pairs{
+        stone = "default:stone",
+        lightwood_trunk = "tigris_underworld:lightwood_trunk",
+        lightwood_pod = "tigris_underworld:lightwood_pod",
+    } do
+        if q.objectives[k] and not q.objectives[k].complete and node.name == v then
+            simple_quests.ohelp.count.add(q, k, 1)
         end
     end
 end)
 
-minetest.register_on_placenode(function(pos, node, placer)
-    if not placer or not placer:is_player() then
-        return
-    end
-    local name = placer:get_player_name()
-    local q = simple_quests.quest_active("tigris_story:first_mining", name)
-    if q then
-        if q.objectives.place and not q.objectives.place.complete and node.name == "tigris_underworld:lightwood_sapling" then
-            local under = minetest.get_node(vector.add(pos, vector.new(0, -1, 0)))
-            if under.name == "default:coalblock" or under.name == "default:stone_with_coal" then
-                simple_quests.ohelp.count.add(q, "place", 1)
-            end
+simple_quests.ohelp.ereg.place("tigris_story:first_mining", function(q, pos, node)
+    if q.objectives.place and not q.objectives.place.complete and node.name == "tigris_underworld:lightwood_sapling" then
+        local under = minetest.get_node(vector.add(pos, vector.new(0, -1, 0)))
+        if under.name == "default:coalblock" or under.name == "default:stone_with_coal" then
+            simple_quests.ohelp.count.add(q, "place", 1)
         end
     end
 end)

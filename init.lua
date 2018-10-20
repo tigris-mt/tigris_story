@@ -36,3 +36,6 @@ tigris.include("spawn.lua")
 
 -- Get the player mining basic materials and farming lightwood.
 tigris.include("first_mining.lua")
+
+-- Demonstrate more mining and metalworking, send the player deeper.
+tigris.include("metalworking.lua")

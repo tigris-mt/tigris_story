@@ -58,7 +58,7 @@ minetest.register_node("tigris_story:lightwood_spawner", {
 
     on_construct = function(pos)
         minetest.get_node_timer(pos):start(1)
-        minetest.get_meta(pos):set_string("infotext", "Sowing Hand of Anemyde\nThis sacred device applies the slow but sure power of Anemyde to ensure the nearby caves will never run out of lightwood.")
+        minetest.get_meta(pos):set_string("infotext", "Sowing Hand of Anemyde\nThis sacred device applies the slow but inevitable power of Anemyde to ensure the nearby caves will never run out of lightwood.")
     end,
 
     on_timer = function(pos)
@@ -114,9 +114,13 @@ minetest.register_node("tigris_story:lightwood_spawner", {
             return false
         end
 
+        -- If there's less than 10 pods in the area, spawn more.
         if #minetest.find_nodes_in_area(min, max, {"tigris_underworld:lightwood_pod"}) < 10 then
+            -- First try least invasive option, just replacing on a trunk.
             if not pod() then
+                -- Then try spawning a tree on coal.
                 if not tree({"default:stone_with_coal", "default:coalblock"}) then
+                    -- Final fallback, try spawning on any stone.
                     tree({"group:stone"})
                 end
             end
