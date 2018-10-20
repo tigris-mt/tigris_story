@@ -1,8 +1,15 @@
 simple_quests.register("tigris_story:first_mining", {
     shortdesc = "First Mining",
+    longdesc = function(state)
+        return "Begin your journey by mining important base materials."
+    end,
+    superdesc = function(state)
+        return "Venturing out of the Room of Light is a task in itself. Because Inemyde has situated it under the surface of the planet, you must tunnel and cave your way out.\nBegin by gathering materials necessary for your survival outside the Room of Light.\nDescend the ladder to the tunnels constructed by Inemyde herself.\nYou may return to the Room of Light at any time by calling upon Inemyde [/recall].\nStone is readily found, but you may need to search within caves for Lightwood trees." .. (state:flagged("farm") and "\n\nLightwood trees are important resources. You can grow new lightwood trees by placing their saplings on coal blocks or coal in stone. Be careful that there is enough empty space above the sapling for it to grow." or "")
+    end,
+
+    flags = {"farm"},
+
     init = function(state)
-        state.longdesc = "Begin your journey by mining important base materials."
-        state.superdesc = "Venturing out of the Room of Light is a task in itself. Because Inemyde has situated it under the surface of the planet, you must tunnel and cave your way out.\nBegin by gathering materials necessary for your survival outside the Room of Light.\nDescend the ladder to the tunnels constructed by Inemyde herself.\nYou may return to the Room of Light at any time by calling upon Inemyde [/recall].\nStone is readily found, but you may need to search within caves for Lightwood trees."
         state.step = "farm"
 
         state:objective("stone", simple_quests.ohelp.count.init{
@@ -23,11 +30,11 @@ simple_quests.register("tigris_story:first_mining", {
 
     steps = {
         farm = function(state)
-            state.superdesc = state.superdesc .. "\n\nLightwood trees are important resources. You can grow new lightwood trees by placing their saplings on coal blocks or coal in stone. Be careful that there is enough empty space above the sapling for it to grow."
             state:objective("place", simple_quests.ohelp.count.init{
                 description = "Place a lightwood sapling on coal.",
                 max_count = 1,
             })
+            state:flag("farm")
             state:superdesc_show("Quest information updated:")
             state:set_step("pray")
         end,

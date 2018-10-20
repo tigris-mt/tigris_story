@@ -58,3 +58,6 @@ tigris.include("metalworking.lua")
 
 -- Get the player started on hunting.
 tigris.include("hunting.lua")
+
+-- Transportation to the surface.
+tigris.include("surface.lua")

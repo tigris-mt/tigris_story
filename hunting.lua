@@ -1,9 +1,12 @@
 simple_quests.register("tigris_story:hunting", {
     shortdesc = "Hunting",
+    longdesc = function(state)
+        return "There are many creatures of this world that provide valuable resources."
+    end,
+    superdesc = function(state)
+        return "You are not the only form of animal life on this world. There exist many others, ranging from the lowly worms to the manifested Aspects of Bulorset. You have been given dominion over it all, and the blessing of Inemyde permits you to take what is yours.\n\nProve your claim by slaying a number of these resources. You will find them wandering the cave systems, though they will not draw near to the Room of Light."
+    end,
     init = function(state)
-        state.longdesc = "There are many creatures of this world that provide valuable resources."
-        state.superdesc = "You are not the only form of animal life on this world. There exist many others, ranging from the lowly worms to the manifested Aspects of Bulorset. You have been given dominion over it all, and the blessing of Inemyde permits you to take what is yours.\n\nProve your claim by slaying a number of these resources. You will find them wandering the cave systems, though they will not draw near to the Room of Light."
-
         state:objective("kill", simple_quests.ohelp.count.init{
             description = "Hunt whatever you can find.",
             max_count = 5,

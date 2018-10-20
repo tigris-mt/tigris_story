@@ -1,9 +1,12 @@
 simple_quests.register("tigris_story:arrival", {
     shortdesc = "Arrival",
+    longdesc = function(state)
+        return "Your first orders after arrival in the new world."
+    end,
+    superdesc = function(state)
+        return "Welcome to the Room of Light.\nThe time has come for you to conquer this world.\nApproach the altar of Inemyde the Merciful and receive her blessing."
+    end,
     init = function(state)
-        state.longdesc = "Your first orders after arrival in the new world."
-        state.superdesc = "Welcome to the Room of Light.\nThe time has come for you to conquer this world.\nApproach the altar of Inemyde the Merciful and receive her blessing."
-
         state:objective("pray", {
             description = "Pray at the altar.",
         })
@@ -36,6 +39,7 @@ end)
 local old = underground_start.generation_callback
 function underground_start.generation_callback(...)
     minetest.set_node(vector.add(({underground_start.box()})[1], vector.new(0, 0, 3)), {name = "tigris_story:altar"})
+    minetest.set_node(vector.add(({underground_start.box()})[1], vector.new(0, 8, 3)), {name = "tigris_story:golden_altar"})
 
     for _,t in ipairs(underground_start.tunnels) do
         local pos = vector.divide(vector.add(t.min, t.max), 2)

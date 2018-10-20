@@ -1,9 +1,12 @@
 simple_quests.register("tigris_story:metalworking", {
     shortdesc = "Metalworking",
+    longdesc = function(state)
+        return "Mining and working metals are vital functions."
+    end,
+    superdesc = function(state)
+        return "This world is rich in metals. You can make use of them all. Collect some of the most common metals and a furnace to smelt them in. You may need to explore beyond the Room of Light and it's tunnels. Once you have collected some metals, you can craft better tools."
+    end,
     init = function(state)
-        state.longdesc = "Mining and working metals are vital functions."
-        state.superdesc = "This world is rich in metals. You can make use of them all. Collect some of the most common metals and a furnace to smelt them in. You may need to explore beyond the Room of Light and it's tunnels. Once you have collected some metals, you can craft better tools."
-
         state:objective("iron", simple_quests.ohelp.count.init{
             description = "Mine iron.",
             max_count = 10,
