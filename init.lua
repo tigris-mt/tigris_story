@@ -42,6 +42,8 @@ function m.kill_helper(quest, func)
     end
 end
 
+tigris.include("prayer.lua")
+
 -- The focal point of early quests.
 tigris.include("altar.lua")
 
@@ -54,5 +56,5 @@ tigris.include("first_mining.lua")
 -- Demonstrate more mining and metalworking, send the player deeper.
 tigris.include("metalworking.lua")
 
--- Get the player started on hunting and make them aware of clay worms specifically.
+-- Get the player started on hunting.
 tigris.include("hunting.lua")
