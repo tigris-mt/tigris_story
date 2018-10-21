@@ -8,17 +8,17 @@ simple_quests.register("tigris_story:next_steps", {
     end,
 
     init = function(state)
-        state:objective("rose", {
+        state:objective("rose", simple_quests.ohelp.count.init{
             description = "Pick roses.",
             max_count = 3,
         })
 
-        state:objective("jungle_grass", {
+        state:objective("jungle_grass", simple_quests.ohelp.count.init{
             description = "Harvest jungle grass.",
             max_count = 5,
         })
 
-        state:objective("shear", {
+        state:objective("shear", simple_quests.ohelp.count.init{
             description = "Shear wool of any kind.",
             max_count = 3,
         })
@@ -40,7 +40,7 @@ local old = tigris.mobs.interactions.shear_wool.func
 function tigris.mobs.interactions.shear_wool.func(self, context)
     local r = old(self, context)
     if r then
-        local q = simple_quests.quest_active("tigris_story:next_steps")
+        local q = simple_quests.quest_active("tigris_story:next_steps", context.other:get_player_name())
         if q and q.objectives.shear and not q.objectives.shear.complete then
             q:objective_done("shear")
         end
