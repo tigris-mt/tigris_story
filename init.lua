@@ -67,3 +67,4 @@ tigris.include("hunting.lua")
 tigris.include("surface.lua")
 
 -- Guide the player to find useful surface materials like flowers.
+tigris.include("next_steps.lua")
