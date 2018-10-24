@@ -89,7 +89,7 @@ register("tigris_story:golden_altar",
             return
         end
 
-        if not q.complete then
+        if not q.done then
             q:objective_done("pray")
         end
 
